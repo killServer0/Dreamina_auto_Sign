@@ -48,7 +48,7 @@ def get_random_birthday():
 async def save_account(email, pwd):
     reg_date = datetime.datetime.now().strftime("%Y-%m-%d")
     with open(SAVE_FILE_PATH, "a+", encoding="utf-8") as f:
-        f.write(f"账号: {email} ---- 密码: {pwd} ---- 注册日期: {reg_date}\n")
+        f.write(f"{email}----{pwd}----{reg_date}\n")
         
 def get_existing_emails():
     emails = set()
@@ -56,7 +56,7 @@ def get_existing_emails():
         return emails
     with open(SAVE_FILE_PATH, "r", encoding="utf-8") as f:
         for line in f:
-            match = re.search(r"账号:\s*(\S+@\S+)", line)
+            match = re.search(r"^\s*(\S+@\S+)", line)
             if match:
                 emails.add(match.group(1).strip())
     return emails
